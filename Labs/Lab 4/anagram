@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Check that files exist within pwd
+[[ ! -f sign.c  ]] && echo "Error: Could not find sign.c" && exit 1
+[[ ! -f squash.awk ]] && echo "Error: Could not find squash.awk" && exit 1
+
+# Check if sign.c is already compiled. else compile
+[[ ! -f sign ]] && gcc -o sign sign.c
+
+./sign < /usr/share/dict/words | sort | awk -f squash.awk | awk '{print NF " " $0}' | sort -rn | head -n 8

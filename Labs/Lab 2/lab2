@@ -1,0 +1,18 @@
+Q1: ./Labs/Lab2/Tmp/gotMe.bash
+    ./Labs/Lab2/list
+Q2: find . -type f -name "*.bash"
+Q3: 499 breadIsDangerous.txt
+Q4: 499
+Q5: ls -1 | wc -l
+Q6: cat breadIsDangerous.txt | grep bread
+Q7: grep the < breadIsDangerous.txt | wc -l
+Q8: There is now a spellExample.bak file containing the original content from spellExample
+Q9: This is showing only the differences between spellExample.bak and spellExample, which includes the spelling correction and the additional line.
+Q10: Nothing, because the file is identical to itself.
+Q11: The output is not what I expected. Instead of actually sorting the values based off of their numerical value, the sort command sorted them soley based off of the digit in the leftmost position.
+Q12: This output makes more logical sense, considering the numbers were actually sorted from least to greatest.
+Q13: The files are listed in order of filesize from greatest to least.
+Q14: du * | sort -rn | head -n 8
+Q15: The exit status is 0 if selected lines are found, and 1 if not found. If an error occurred the exit status is 2.
+Q16: File breadIsDangerous.txt has 499 words
+Q17: echo "The current working directory is: `pwd`"

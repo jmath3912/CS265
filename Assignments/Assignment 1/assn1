@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# Declare usage function to be printed if invalid usage is detected
+usage() {
+	echo "./zoo [-f filename] [start_directory] measurement" && exit 1
+}
+
+# Recursive directory traversal function
+function traverse() {
+for file in "$1"/*; do
+    if [ ! -d "$file" ]; then
+        if [ -f "$file" ]; then
+	    [[ "$(echo "$file" | rev | cut -d'/' -f1 | rev)" == "$FILENAME" ]] && count "$file"
+	fi
+    else
+	traverse "$file" "$FILENAME"
+    fi
+done
+}
+
+# Animal counting function
+function count() {
+    tally=$( [[ $(grep "$MEASUREMENT" < "$1") != "" ]] && grep "$MEASUREMENT" < "$1" | rev | cut -d' ' -f1 | rev || echo 0)
+    case "$MEASUREMENT" in
+        "bear" ) (( bear+="$tally" )) ;;
+        "dromedary" ) (( dromedary+="$tally" )) ;;
+        "aardvark" ) (( aardvark+="$tally" )) ;;
+        "genet" ) (( genet+="$tally" )) ;;
+        "lemur" ) (( lemur+="$tally" )) ;;
+    esac
+}
+
+# Global vars for filename, root dir, and all animal counts, respectively
+FILENAME=".KS_Dir"
+STARTDIR="."
+bear=0
+dromedary=0
+aardvark=0
+genet=0
+lemur=0
+
+# command flag options syntax
+options=":f:?"
+
+# check if flag is f and set filename equal to supplied argument. else print usage and exit
+while getopts "$options" opt; do
+        case $opt in
+                f  ) FILENAME="$OPTARG" ;;
+                \? | : ) usage ;;
+        esac
+done
+
+# Rename trailing argument as 1 and subsequent arguments as 2, 3, etc.
+shift $(( ${OPTIND}-1 ))
+
+# Handle too little or too many addition arguments
+[[ $# -eq 0 ]] && usage
+[[ $# -gt 2 ]] && echo "Error: Too many arguments provided" && usage
+
+# Check number of arguments. If 1, only measurement is supplied. if 2, root dir and measurement are supplied, respectively
+case $# in
+	1 ) MEASUREMENT=$1 ;;
+	2 ) STARTDIR=$1 ; MEASUREMENT=$2 ;;
+esac
+
+case "$MEASUREMENT" in
+	"bear" ) ;;
+	"dromedary" ) ;;
+	"aardvark" ) ;;
+	"genet" ) ;;
+	"lemur" ) ;;
+	* ) # If provided measurement is not in list, error
+		echo -e "Error: Invalid animal \"'$MEASUREMENT'\" provided.\n\nValid choices are: aardvark, bear, dromedary, genet, lemur." ; usage ;;
+esac
+
+traverse "$STARTDIR" "$FILENAME"
+
+echo -n "$MEASUREMENT "
+case "$MEASUREMENT" in
+	"bear" ) echo $bear ;;
+	"dromedary" ) echo $dromedary ;;
+	"aardvark" ) echo $aardvark ;;
+	"genet" ) echo $genet ;;
+	"lemur" ) echo $lemur ;;
+esac

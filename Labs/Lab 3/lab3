@@ -1,0 +1,36 @@
+Q1: The command returns true. this is because the '<' symbol, when used with [[ ]], compares the provided values as
+strings (character by character) until the end of the strings. In this case, the first digit of 13 is in fact less than
+2, so that statement evaluates to true. Since there is a &&, the other statement must execute for the whole command to
+be considered true.
+
+Q2: The output is "All we have to decide is what to do with the chocolate that is given us..." This is returned because
+grep found the word chocolate within the file mySettings. Since this condition returns true, the if statement can now
+execute its block of code, which happens to be an echo command which prints the result above.
+
+Q3: The output is 2. The variable x is set equal to 13. The following echo command returns the floor of the quotient of that variable
+x and 5, which in this case is 2.
+
+Q4: The output is 0. We are performing the modulus of 27 and 2, which is 1. From there, we test to see if the result of
+the modulus is equal to 1. If it is, return true (0), else return false (1). Since the modulus is equal to 1, we return
+0.
+
+Q5: The output is different for both commands because the second one is run within a subshell, as denoted by the
+parentheses. Because of this, the assignment of 12 to x is only performed within the subshell, and therefore does not
+carry over to the x outside of the parentheses.
+
+Q6: Item
+	 Another
+	 item
+
+Q7: Item
+	 Another item
+
+Q8: Item
+    Another item
+
+Q9: count.bash - uploaded to BbLearn
+
+Q10: reextend - uploaded to BbLearn
+
+Q11: organiseMusic - uploaded to BbLearn
+

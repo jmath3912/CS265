@@ -1,0 +1,42 @@
+Q2: Line Two
+Q3: Line Three
+Q4: total 43
+-rw-r--r-- 1 jpm449 jpm449  8060 Jun 28 22:20 funny
+-rwxr--r-- 1 jpm449 jpm449   240 Jun 28 22:21 hello.bash
+-rw-rw-r-- 1 jpm449 jpm449    33 Jun 28 22:21 lab1
+-rw-rw-r-- 1 jpm449 jpm449    33 Jun 28 22:18 lab1~
+-rw-rw-r-- 1 jpm449 jpm449 33720 Jun 28 22:08 vi_lab
+Q5: read and write for user (me), read only for everyone else
+Q6: all perms for user (me), read and exec only for everyone else
+Q7: yes
+Q8: yes
+Q9: no
+Q10: set chmod 544 or 744 for the hello.bash
+Q11: funny file is unwritable
+Q12:
+
+ls *:
+annoy     funny       itemList        lab1   TelecomTruths     vi_lab
+annoy.cc  hello.bash  itemList-2cols  lab1~  UnitTestingPhase
+
+ls a*:
+annoy  annoy.cc
+
+ls *m*:
+itemList  itemList-2cols  TelecomTruths
+
+ls anno?:
+annoy
+
+ls annoy?:
+ls: cannot access 'annoy?': No such file or directory
+
+Q13: creates two new files to edit ('a' and 'space')
+
+Q14: 
+
+-h: human readable
+-l: long listing format
+-t: sort by modification time
+-A: lists everything except implied . and ..
+-d: lists directories themselves, excluding their contents

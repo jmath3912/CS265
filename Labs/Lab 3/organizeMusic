@@ -1,0 +1,15 @@
+#!/bin/bash
+
+ls -1 | grep -q *.mp3
+if [ $? -ne 0 ]; then
+	echo "No mp3 files in current directory."
+	exit 1
+fi
+
+for track in *.mp3; do
+	artist="$(echo "${track}" | cut -d'-' -f1 | awk '{$1=$1};1')"
+	title="$(echo "${track}" | cut -d'-' -f2 | awk '{$1=$1};1')"
+
+	mkdir -p "$artist"
+	mv "$track" "$artist/$title"
+done
