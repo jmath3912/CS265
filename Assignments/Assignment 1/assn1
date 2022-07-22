@@ -1,5 +1,7 @@
 #!/bin/bash
 
+shopt -s dotglob
+
 # Declare usage function to be printed if invalid usage is detected
 usage() {
 	echo "./zoo [-f filename] [start_directory] measurement" && exit 1
@@ -10,7 +12,7 @@ function traverse() {
 for file in "$1"/*; do
     if [ ! -d "$file" ]; then
         if [ -f "$file" ]; then
-	    [[ "$(echo "$file" | rev | cut -d'/' -f1 | rev)" == "$FILENAME" ]] && count "$file"
+	    [[ "$(echo "$file" | rev | cut -d'/' -f1 | rev)" == "$FILENAME" ]] && file_exists=1 && count "$file"
 	fi
     else
 	traverse "$file" "$FILENAME"
@@ -38,6 +40,7 @@ dromedary=0
 aardvark=0
 genet=0
 lemur=0
+file_exists=0
 
 # command flag options syntax
 options=":f:?"
@@ -73,7 +76,8 @@ case "$MEASUREMENT" in
 		echo -e "Error: Invalid animal \"'$MEASUREMENT'\" provided.\n\nValid choices are: aardvark, bear, dromedary, genet, lemur." ; usage ;;
 esac
 
-traverse "$STARTDIR" "$FILENAME"
+traverse "$STARTDIR"
+[[ "$file_exists" == 0 ]] && echo "$FILENAME does not exist in current directory" && exit 1
 
 echo -n "$MEASUREMENT "
 case "$MEASUREMENT" in
@@ -83,3 +87,4 @@ case "$MEASUREMENT" in
 	"genet" ) echo $genet ;;
 	"lemur" ) echo $lemur ;;
 esac
+shopt -u dotglob
